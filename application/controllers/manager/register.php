@@ -127,6 +127,94 @@ class Register extends CI_Controller{
     }
     
     function freight_source(){
+        $a = $this->input->get('a');
+        $ao = json_decode( urldecode($a) );
         
+        $this->load->model("common_model");
+        $systemUser = $this->common_model->getOne("systemuser","mobileNo", $ao->registerInfo->regPhone);
+        if ( !$systemUser) {
+            $systemUser = $this->common_model->getOne("systemuser","userId", $ao->registerInfo->regPhone);
+        }
+        if ( ! $systemUser){
+            $result['msg'] = '帐号有问题，请重新登录';
+            $result['status'] = 'ERROR';
+        } else {
+            $makeTime = date_format(date_create(), 'Y-m-d H:i:s');
+            $freightSource = array(
+                    'makeTime' => $makeTime,
+                    'createUserId' => $systemUser->id,
+                    'createUserName' => $ao->registerInfo->regUsername,
+                    'attention' => $ao->freightSource->attention,
+                    'destCity' => $ao->freightSource->destCity,
+                    'destProvince' => $ao->freightSource->destProvince,
+                    'destRegion' => $ao->freightSource->destRegion,
+                    'freightName' => $ao->freightSource->freightName,
+                    'freightType' => $ao->freightSource->freightType,
+                    'freightVolumn' => $ao->freightSource->freightVolumn,
+                    'freightWeight' => $ao->freightSource->freightWeight,
+                    'originCity' => $ao->freightSource->originCity,
+                    'originProvince' => $ao->freightSource->originProvince,
+                    'originRegion' => $ao->freightSource->originRegion,
+                    'packType' => $ao->freightSource->packType,
+                    //'auditUserId' => $ao->freightSource->auditUserId,
+                    'freightState' => 0,
+                );
+            $id = $this->common_model->save(TABLE_FREIGHT_SOURCE, $freightSource);
+            if ( $id ) {
+                $fs = $this->common_model->getOne(TABLE_FREIGHT_SOURCE, 'id', $id);
+                if ($fs) {
+                    //print_r($fs);
+                    $his = array(
+                        'modifyType' => 1,
+                        'modifyTime' => $makeTime,
+                        'createUserId' => $systemUser->id,
+                        'createUserName' => $ao->registerInfo->regUsername,
+                        'attention' => $ao->freightSource->attention,
+                        'destCity' => $ao->freightSource->destCity,
+                        'destProvince' => $ao->freightSource->destProvince,
+                        'destRegion' => $ao->freightSource->destRegion,
+                        'freightName' => $ao->freightSource->freightName,
+                        'freightType' => $ao->freightSource->freightType,
+                        'freightVolumn' => $ao->freightSource->freightVolumn,
+                        'freightWeight' => $ao->freightSource->freightWeight,
+                        'originCity' => $ao->freightSource->originCity,
+                        'originProvince' => $ao->freightSource->originProvince,
+                        'originRegion' => $ao->freightSource->originRegion,
+                        'packType' => $ao->freightSource->packType,
+                        'freightSourceId' => $fs->id ,
+                        'freightState' => 0,
+                        'makeTime' => $makeTime,
+                        //'auditUserId' => $ao->truckInfo->auditUserId,
+                     );
+                     $this->common_model->save(TABLE_FREIGHT_SOURCE_HIS, $his);
+                }
+            }
+            
+            $result['status'] = 'OK';
+            
+        }
+        $this->output
+                ->set_content_type("application/json")
+                ->set_output(json_encode($result));
     }
+
+    /*
+     *  freightSource.setMakeTime(now);
+        freightSource.setCreateUserId(user.getId());
+        freightSource.setCreateUserName(user.getUserName());
+        fs.setAttention(vo.getAttention());
+        fs.setDestCity(vo.getDestCity());
+        fs.setDestProvince(vo.getDestProvince());
+        fs.setDestRegion(vo.getDestRegion());
+        fs.setFreightName(vo.getFreightName());
+        fs.setFreightType(vo.getFreightType());
+        fs.setFreightVolumn(vo.getFreightVolumn());
+        fs.setFreightWeight(vo.getFreightWeight());
+        fs.setCreateUserId(user.getId());
+        fs.setCreateUserName(user.getUserName());
+        fs.setOriginCity(vo.getOriginCity());
+        fs.setOriginProvince(vo.getOriginProvince());
+        fs.setOriginRegion(vo.getOriginRegion());
+        fs.setPackType(vo.getPackType());
+ * */
 } 

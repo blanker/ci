@@ -46,5 +46,7 @@ define('TABLE_TRUCK_INFO_HIS',     'truckinfohis');
 define('TABLE_SYSTEM_USER',        'systemuser');
 define('TABLE_DRIVER_LOCATION',    'driverlocation');
 define('TABLE_DRIVER_LOCATION_RT', 'driverlocationrt');
+define('TABLE_FREIGHT_SOURCE',     'freightsource');
+define('TABLE_FREIGHT_SOURCE_HIS', 'freightsourcehis');
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */
