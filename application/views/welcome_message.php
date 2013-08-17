@@ -75,11 +75,18 @@
 <body>
 
 <div id="download">
-    <?= anchor("/download/client/2013_7_30", "Android客户端下载"); ?>
+    <?= anchor("/download/client/2013_8_16", "Android客户端下载"); ?>
 </div>
 <div id="message">
     <h1>功能说明</h3>
         
+    <dl>2013-8-16</dl>
+    <dt>1、客户端可查询货源信息</dt>
+    <dt>2、客户端可查询车源信息</dt>
+    <dt>3、解决时区问题</dt>
+    
+    <p/>
+    
     <dl>2013-8-15</dl>
     <dt>1、客户端可发布货源信息</dt>
     

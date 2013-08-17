@@ -15,3 +15,4 @@ user_guide/*
 .project
 ci.clpprj
 license.txt
+/download/com.anda.driver.location*.apk
