@@ -9,7 +9,9 @@ RewriteBase /
 # - robots.txt
 # - favicon.ico
 # - Any file inside of the media/ directory
-RewriteRule ^(index\.php|robots\.txt|favicon\.ico|media|uploads) - [PT,L]
+RewriteRule ^(index\.php|robots\.txt|favicon\.ico|media|uploads|html) - [PT,L]
 
 # Rewrite all other URLs to index.php/URL
 RewriteRule .* index.php?/$0 [PT,L,QSA]
+
+Header set Access-Control-Allow-Origin "*"

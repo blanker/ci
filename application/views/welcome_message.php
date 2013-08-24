@@ -63,6 +63,10 @@
 		border: 1px solid #D0D0D0;
 		-webkit-box-shadow: 0 0 8px #D0D0D0;
 	}
+	#download {
+	    text-align: center;
+	    padding: 10px;
+	}
     dt {
         padding: 3px 10px;
     }
@@ -71,50 +75,58 @@
         padding: 6px 10px;
     }
 	</style>
+	<link rel="stylesheet" type="text/css" href="<?=base_url();?>html/js/jquery-easyui-1.3.4/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="<?=base_url();?>html/js/jquery-easyui-1.3.4/themes/icon.css">
+    <script type="text/javascript" src="<?=base_url();?>html/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="<?=base_url();?>html/js/jquery-easyui-1.3.4/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="<?=base_url();?>html/js/jquery-easyui-1.3.4/locale/easyui-lang-zh_CN.js"></script>
 </head>
-<body>
+<body class="easyui-layout">
 
-<div id="download">
-    <?= anchor("/download/client/2013_8_16", "Android客户端下载"); ?>
-</div>
-<div id="message">
-    <h1>功能说明</h3>
-        
-    <dl>2013-8-16</dl>
-    <dt>1、客户端可查询货源信息</dt>
-    <dt>2、客户端可查询车源信息</dt>
-    <dt>3、解决时区问题</dt>
-    
-    <p/>
-    
-    <dl>2013-8-15</dl>
-    <dt>1、客户端可发布货源信息</dt>
-    
-    <p/>
-    <dl>2013-7-30</dl>
-    <dt>1、客户端可登录</dt>
-    <dt>2、客户端可上传定位信息</dt>    
-    <dt>3、客户端可注册用户</dt>
-    <dt>4、客户端可发布车源信息</dt>
-</div>
+    <div data-options="region:'north'" style="height:100px;overflow: hidden;">
+        <div class="easyui-panel" style="height:98px;line-height:98px;overflow: hidden;">
+            <table style="padding:0px; margin:0px;"><tr><td>
+            <?=form_open('manager/home/login',array('style'=>'padding:0px;margin:0px;'));?>
+            <?=form_label('帐号','userId');?>
+            <?=form_input(array('name'=>'userId','id'=>'userId','class'=>'easyui-validatebox','size'=>'12','maxLength'=>"30",'data-options'=>"required:true"));?>
+            <?=form_label('密码','password');?>
+            <?=form_password(array('name'=>'password','id'=>'password','class'=>'easyui-validatebox','size'=>'12','maxLength'=>"30",'data-options'=>"required:true"));?>
+            <?=form_submit(array('id'=>'btnSubmit'),"登录");?>
+            <?=form_close();?>
+            </td></tr></table>
+        </div>
+    </div>
+    <div data-options="region:'south',split:true" style="height:50px;overflow: hidden;">
+        <div style="text-align:center; height:42px;line-height:42px; padding:0px; margin:0px;">掌上物流平台版权所有</div>
+    </div>
+    <div data-options="region:'east',split:true,collapsible:false" style="width:250px;">
+        <div id="download">
+            <?= anchor("/download/client/2013_8_16", "Android客户端下载", array( 'class'=>"easyui-linkbutton" ,'data-options'=>"iconCls:'icon-save'") ); ?>
+        </div>
+        <div id="message">
+            <h1>功能说明</h3>
+                
+            <dl>2013-8-16</dl>
+            <dt>1、客户端可查询货源信息</dt>
+            <dt>2、客户端可查询车源信息</dt>
+            <dt>3、解决时区问题</dt>
+            
+            <p/>
+            
+            <dl>2013-8-15</dl>
+            <dt>1、客户端可发布货源信息</dt>
+            
+            <p/>
+            <dl>2013-7-30</dl>
+            <dt>1、客户端可登录</dt>
+            <dt>2、客户端可上传定位信息</dt>    
+            <dt>3、客户端可注册用户</dt>
+            <dt>4、客户端可发布车源信息</dt>
+        </div>
 
-<div id="container" style="display:none;">
-	<h1>Welcome to CodeIgniter!</h1>
-
-	<div id="body">
-		<p>The page you are looking at is being generated dynamically by CodeIgniter.</p>
-
-		<p>If you would like to edit this page you'll find it located at:</p>
-		<code>application/views/welcome_message.php</code>
-
-		<p>The corresponding controller for this page is found at:</p>
-		<code>application/controllers/welcome.php</code>
-
-		<p>If you are exploring CodeIgniter for the very first time, you should start by reading the <a href="user_guide/">User Guide</a>.</p>
-	</div>
-
-	<p class="footer">Page rendered in <strong>{elapsed_time}</strong> seconds</p>
-</div>
+    </div>
+    <div data-options="region:'center'" style="padding:10px">
+    </div>
 
 </body>
 </html>
