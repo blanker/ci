@@ -19,20 +19,46 @@
     .panel-tool-expand{
         background:url('<?=base_url();?>html/images/arrow_down.gif') no-repeat 0px -3px;
     }
+    a.menuAnch {
+        text-decoration:none;
+    }
+    * { font-size: 14px; }
 </style>
-<script type="text/javascript" src="<?=base_url();?>html/js/jquery-1.8.3.min.js"></script>
-<script type="text/javascript" src="<?=base_url();?>html/js/jquery-easyui-1.3.4/jquery.easyui.min.js"></script>
-<script type="text/javascript" src="<?=base_url();?>html/js/jquery-easyui-1.3.4/locale/easyui-lang-zh_CN.js"></script>
+<?php echo $this->load->view("includes/jquery");?>
+<?php echo $this->load->view("includes/jeasyui");?>
+<script type="text/javascript" src="<?=base_url();?>html/js/manager/home.js"></script>
 </head>
 <body class="easyui-layout">
-    <div data-options="region:'north'" style="height:150px"></div>
-    <div data-options="region:'south',split:true" style="height:150px;"></div>
+    <div data-options="region:'north'" style="height:60px"></div>
+    <div data-options="region:'south',split:true" style="height:60px;"></div>
     <div data-options="region:'west',split:true" title="菜单" style="width:220px;">
-        <div style="width:200px;height:auto;background:#7190E0;padding:5px;">
+        <div style="width:200px;height:auto;background:#7190E0;padding:5px;overflow:hidden">
+            
+            <?php 
+            $lastMainMenu = '';
+            for ($idx = 0; $idx < sizeof($menu); $idx++ ):
+                $item = $menu[$idx];
+                if ( $lastMainMenu !== $item->menuMain ):
+                    if ($lastMainMenu !== ''){
+                        echo '</div>';
+                    }
+                    echo '<div class="easyui-panel" title="'.$item->menuMain.'" collapsible="true" style="width:200px;height:auto;padding:10px;line-height:20px">';
+                endif;
+                echo '<a class="menuAnch" href="javascript:void(0);" menuId="'.$item->id.'" menuUrl="'.base_url().$item->menuUrl.'?sysmenuid='.$item->id.'">'.$item->menuName.'</a><br/>';
+                $lastMainMenu = $item->menuMain;
+                if ($idx === sizeof($menu) - 1){
+                    echo '</div>';
+                }
+             endfor; 
+             ?>
+                
+            <!--
             <div class="easyui-panel" title="Picture Tasks" collapsible="true" style="width:200px;height:auto;padding:10px;">
                 View as a slide show<br/>
                 Order prints online<br/>
                 Print pictures
+                
+                
             </div>
             <br/>
             <div class="easyui-panel" title="File and Folder Tasks" collapsible="true" style="width:200px;height:auto;padding:10px;">
@@ -53,27 +79,18 @@
                 File folder<br/><br/>
                 Date modified: Oct.3rd 2010
             </div>
+            -->
         </div>
     </div>
-    <div data-options="region:'center',title:'Main Title',iconCls:'icon-ok'">
-        <div class="easyui-tabs" data-options="fit:true,border:false,plain:true">
-            <div title="About" data-options="closable:true,href:'_content.html'" style="padding:10px"></div>
-            <div title="DataGrid" style="padding:5px" data-options="closable:true">
-                <table class="easyui-datagrid"
-                        data-options="url:'datagrid_data1.json',method:'get',singleSelect:true,fit:true,fitColumns:true">
-                    <thead>
-                        <tr>
-                            <th data-options="field:'itemid'" width="80">Item ID</th>
-                            <th data-options="field:'productid'" width="100">Product ID</th>
-                            <th data-options="field:'listprice',align:'right'" width="80">List Price</th>
-                            <th data-options="field:'unitcost',align:'right'" width="80">Unit Cost</th>
-                            <th data-options="field:'attr1'" width="150">Attribute</th>
-                            <th data-options="field:'status',align:'center'" width="50">Status</th>
-                        </tr>
-                    </thead>
-                </table>
-            </div>
+    <div data-options="region:'center',iconCls:'icon-ok'">
+        <div id="tabMain" class="easyui-tabs" data-options="fit:true,border:false,plain:true">
+            <div title="主页" data-options="closable:false,href:'_content.html'" style="padding:10px"></div>
         </div>
+    </div>
+    <div id="w" class="easyui-window" title="请稍候..." 
+        data-options="modal:true,closed:true,closable:false,minimizable:false,maximizable:false,iconCls:'icon-save'" 
+        style="width:200px;height:80px;padding:10px;">
+        保存中，请不要刷新页面
     </div>
 </body>
 </html>

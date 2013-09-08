@@ -44,6 +44,13 @@ define('IS_AJAX', isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVE
 define('TABLE_TRUCK_INFO',         'truckinfo');
 define('TABLE_TRUCK_INFO_HIS',     'truckinfohis');
 define('TABLE_SYSTEM_USER',        'systemuser');
+define('TABLE_SYSTEM_USER_HIS',    'systemuserhis');
+define('TABLE_SYSTEM_MENU',        'systemmenu');
+define('TABLE_SYSTEM_MENU_RIGHTS', 'systemmenurights');
+define('TABLE_SYSTEM_CODE',        'systemcode');
+define('TABLE_SYSTEM_ROLE',        'systemrole');
+define('TABLE_ROLE_MENU_RIGHTS',   'rolemenurights');
+define('TABLE_SYSTEM_USER_ROLE',   'systemuserrole');
 define('TABLE_DRIVER_LOCATION',    'driverlocation');
 define('TABLE_DRIVER_LOCATION_RT', 'driverlocationrt');
 define('TABLE_FREIGHT_SOURCE',     'freightsource');
