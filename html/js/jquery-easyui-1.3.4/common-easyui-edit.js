@@ -175,6 +175,12 @@ $.extend($.fn.validatebox.defaults.rules, {
             return value == $(param[0]).val();
         },
         message: '密码不匹配.'
+    },
+    selectValue: {
+        validator: function(value,param){
+            return $(param[1]).combobox('getValue') != -1;
+        },
+        message: '请选择 {0}'
     }
 });
 
@@ -187,4 +193,43 @@ function ConvertFormToJSON(form){
     });
     
     return json;
+}
+
+function showNameOfCode(codeDefinition, codeName, codeValue ){
+    return codeDefinition[codeName][codeValue];
+}
+function stylerState(value,row,index){
+	if (value == 0){
+		return 'background-color:#BEBEBE;';
+	} else if (value == 1) {
+		return 'background-color:#FFCCCC;';
+	} else if (value == 2){
+		return 'background-color:#669999;';
+	}
+}
+
+// 构造combobox选项
+//get_cb_options('#tl_sel_truckState','状态', codeOfTruckList, 'truckstate', 'auto');
+function get_cb_options(cbid, defaultText, coedList, codeName, panelHeight ){
+	var data = [{value:'-1',text:defaultText}];
+	if ( coedList[codeName] ) {
+		$.each(coedList[codeName], function(k,v){
+		    data.push({value: k, text: v});
+		});
+	}
+	$(cbid).combobox({
+	    data: data,
+	    value: '-1',
+	    panelHeight: panelHeight,
+	    editable: false
+	} );
+}
+
+function get_xiaoshu_weishu(f, max){
+	if (max === undefined) max = 10;
+	f = parseFloat(f);
+	for (var i = 0; i < max; i++){
+		if ( f * Math.pow(10,i) == parseInt(f * Math.pow(10,i)) ) return i;
+	}
+	return max - 1;
 }

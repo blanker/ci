@@ -26,13 +26,13 @@
             <label for='searchCodeStartDate'>加入时间</label><input id='searchCodeStartDate' class="easyui-datebox" style="width:90px">
             <label for='searchCodeEndDate'>到</label><input id='searchCodeEndDate' class="easyui-datebox" readonly="true" style="width:90px">
             -->
-            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="$('#dgCode').datagrid('reload');">查询</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-action-search" plain="true" onclick="$('#dgCode').datagrid('reload');">查询</a>
         </div>
         <div style="border:1px solid #ddd; padding:5px;">
-            <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="append('#dgCode','code');">新增</a>
-            <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" onclick="removeit('#dgCode','code');">删除</a>
-            <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true" onclick="accept('#dgCode','code','<?=base_url();?>manager/system/commit_code','id');">保存</a>
-            <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-undo',plain:true" onclick="reject('#dgCode','code');">撤销更改</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-action-plus',plain:true" onclick="append('#dgCode','code');">新增</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-action-minus',plain:true" onclick="removeit('#dgCode','code');">删除</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-action-save',plain:true" onclick="accept('#dgCode','code','<?=base_url();?>manager/system/commit_code','id');">保存</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-action-undo',plain:true" onclick="reject('#dgCode','code');">撤销更改</a>
         </div>
     </div>
 </div>
@@ -50,7 +50,7 @@
                 param['codeText'] = $.trim($('#searchCodeText').val());
                 //param['codeStartDate'] = $.trim( $('#searchCodeStartDate').datebox('getValue') );
                 //param['codeEndDate'] = $.trim($('#searchCodeEndDate').val());
-                console.log(param);
+                //console.log(param);
                 //$('#searchCodeStartDate').datebox('getValue');
             }
         });

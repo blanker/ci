@@ -103,10 +103,10 @@
             <table style="padding:0px; margin:0px;font-size:medium;"><tr><td>
             <?=form_open(base_url().'manager/home/index',array('id'=>'frmLogin','style'=>'padding:0px;margin:0px;'));?>
             <?=form_label('帐号','userId');?>
-            <?=form_input(array('name'=>'userId','id'=>'userId','class'=>'easyui-validatebox','size'=>'12','maxLength'=>"30",'data-options'=>"required:true"));?>
+            <?=form_input(array('name'=>'userId','id'=>'userId','class'=>'easyui-validatebox','size'=>'12','maxLength'=>"30"));?>
             <?=form_label('密码','password');?>
-            <?=form_password(array('name'=>'password','id'=>'password','class'=>'easyui-validatebox','size'=>'12','maxLength'=>"30",'data-options'=>"required:true"));?>
-            <?=form_submit(array('id'=>'btnSubmit'),"登录");?>
+            <?=form_password(array('name'=>'password','id'=>'password','class'=>'easyui-validatebox','size'=>'12','maxLength'=>"30"));?>
+            <?=form_submit(array('id'=>'btnSubmit','style'=>'cursor:pointer'),"登录");?>
             <?=form_close();?>
             </td></tr></table>
         </div>
@@ -116,7 +116,7 @@
     </div>
     <div data-options="region:'east',split:true,collapsible:false" style="width:250px;">
         <div id="download">
-            <?= anchor("/download/client/2013_8_31", "Android客户端下载", array( 'class'=>"easyui-linkbutton" ,'data-options'=>"iconCls:'icon-save'") ); ?>
+            <?= anchor("/download/client/2013_8_31", "Android客户端下载", array( 'class'=>"easyui-linkbutton" ,'data-options'=>"iconCls:'icon-android'") ); ?>
         </div>
         <div id="message">
             <h1>功能说明</h1>

@@ -17,10 +17,11 @@
         </thead>
     </table>
     <div id="toolbarUser">
-        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="newUser();">新增用户</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editUser();">修改信息</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyUser();">删除用户</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-tip" plain="true" onclick="su_modifyPassword();">修改密码</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-user-add',plain:true" onclick="newUser();">新增用户</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-user-edit" plain="true" onclick="editUser();">修改信息</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-user-del" plain="true" onclick="destroyUser();">删除用户</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-unlock" plain="true" onclick="su_modifyPassword();">修改密码</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-key" plain="true" onclick="su_show_grant_window();">角色授权</a>
     </div>
 </div>
 
@@ -62,8 +63,8 @@
     </form>
 </div>
 <div id="dlgUser-buttons">
-    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveUser()">保存</a>
-    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlgUser').dialog('close')">取消</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-action-ok" onclick="saveUser()">保存</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-action-cancel" onclick="javascript:$('#dlgUser').dialog('close')">取消</a>
 </div>
 
 <div id="su_dlgModifyPassword" class="easyui-dialog" style="width:400px;height:auto;padding:10px 20px;"
@@ -83,13 +84,55 @@
     </form>
 </div>
 <div id="su_dlgModifyPassword-buttons">
-    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="su_saveNewPassword()">保存</a>
-    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#su_dlgModifyPassword').dialog('close')">取消</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-action-ok" onclick="su_saveNewPassword()">保存</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-action-cancel" onclick="javascript:$('#su_dlgModifyPassword').dialog('close')">取消</a>
 </div>
 
+<div id="su_w_grant" class="easyui-window" title="用户授权" data-options="modal:true,collapsible:false,minimizable:false,maximizable:false,closed:true,iconCls:'icon-key'" style="width:500px;height:500px;padding:10px;">
+     <div class="easyui-layout" data-options="fit:true">
+        <div data-options="region:'north'" style="padding:0px;height:150px;">
+            <table id="su_dgUserRole" title="用户现有角色列表" style="height:auto"
+                pagination="false" idField="id"
+                rownumbers="true" fitColumns="true" singleSelect="true" striped="true"
+                data-options="">
+                <thead>
+                    <tr>
+                        <th field="id" hidden="true" width="60">id</th>
+                        <th field="roleId" width="60">角色编码</th>
+                        <th field="userId" hidden="true" width="60">userId</th>
+                        <th field="roleName" width="170">角色名称</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div data-options="region:'center',split:true" style="padding:0px;">
+            <div style="text-align:center;">
+                <a class="easyui-linkbutton" title='删除角色' data-options="plain:true,iconCls:'icon-fastdown'" href="javascript:void(0)" onclick="su_remove_user_role()"></a>
+                <a class="easyui-linkbutton" title='添加角色' data-options="plain:true,iconCls:'icon-fastup'" href="javascript:void(0)" onclick="su_add_user_role()"></a>
+            </div>
+            <table id="su_dgSysRole" title="系统角色列表" style="height:auto"
+                pagination="true" idField="id"
+                rownumbers="true" fitColumns="true" singleSelect="true" striped="true"
+                data-options="" pageSize="10" pageList='[10]'>
+                <thead>
+                    <tr>
+                        <th field="id" width="60">角色编号</th>
+                        <th field="roleName" width="170">角色名称</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div data-options="region:'south',border:false" style="text-align:right;padding:5px 0 0;">
+            <a class="easyui-linkbutton" data-options="iconCls:'icon-action-ok'" href="javascript:void(0)" onclick="accept('#su_dgUserRole','userRoleRights','<?=base_url();?>manager/rights/commit_user_role_rights','id');">保存</a>
+            <a class="easyui-linkbutton" data-options="iconCls:'icon-action-cancel'" href="javascript:void(0)" onclick="$('#su_w_grant').window('close');">关闭</a>
+        </div>
+    </div>
+</div>
+    
 <script type="text/javascript" src="<?=base_url();?>html/js/jquery.md5.min.js"></script>
 <script type="text/javascript">
     // 系统代码
+    /*
     var codeOfSysUser = {
         custtype: {
             '0': '管理者',
@@ -100,8 +143,10 @@
             '1': '手机客户端',
             '2': '网页客户端'
         }
-    };
+    };*/
     //   
+    var codeOfSysUser = <?=$codes;?>;
+    //console.log(codeOfSysUser);
     function initSystemUser(){
         var optHtml = '';
         $.each(codeOfSysUser['custtype'], function(key, val){
@@ -203,14 +248,11 @@
         }
     }
     
-    function showNameOfCode( codeName, codeValue ){
-        return codeOfSysUser[codeName][codeValue];
-    }
     function showNameOfCustType(value,row,index){
-        return showNameOfCode('custtype',value);
+        return showNameOfCode(codeOfSysUser,'custtype',value);
     }
     function showNameOfMakeType(value,row,index){
-        return showNameOfCode('maketype',value);
+        return showNameOfCode(codeOfSysUser,'maketype',value);
     }
     function su_modifyPassword(){
         var row = $('#dgUser').datagrid('getSelected');
@@ -247,6 +289,52 @@
                     msg: resp.responseText
                 });
             });
+        }
+    }
+    
+    // 用户授权
+    editIndex['userRoleRights'] = undefined;
+    function su_show_grant_window(){
+        var row = $('#dgUser').datagrid('getSelected');
+        if (row){
+            $('#su_dgSysRole').datagrid({
+                url: '<?=base_url();?>manager/rights/get_role_list'            
+            });
+            $('#su_dgUserRole').datagrid({
+                url: '<?=base_url();?>manager/rights/get_user_role',
+                queryParams: { userId: row['id'] }
+            });
+            $('#su_w_grant').window('open');
+        }
+    }
+    // 除去某个角色
+    function su_remove_user_role(){
+        var row = $('#su_dgUserRole').datagrid('getSelected');
+        if (row){
+            var index = $('#su_dgUserRole').datagrid("getRowIndex", row);
+            $( '#su_dgUserRole' ).datagrid('deleteRow', index); // 并删除当前行
+        }
+    }
+    // 添加某个角色
+    function su_add_user_role(){
+        var row = $('#su_dgSysRole').datagrid('getSelected');
+        if (row){
+            $userRoles = $('#su_dgUserRole').datagrid('getRows');
+            var hasRole = false;
+            $.each( $userRoles, function(idx, val){
+                if ( val['roleId'] === row['id'] ) {
+                    alert('该角色已经授权用户，不必重复授权');
+                    hasRole = true;
+                    return false;
+                }
+            });
+            if ( !hasRole ) {
+                $('#su_dgUserRole').datagrid('appendRow',{
+                    roleId: row['id'],
+                    roleName: row['roleName'],
+                    userId: $('#dgUser').datagrid('getSelected')['id']
+                });
+            }
         }
     }
 </script>

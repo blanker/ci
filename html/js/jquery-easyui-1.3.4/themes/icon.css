@@ -1,6 +1,39 @@
 .icon-blank{
 	background:url('icons/blank.gif') no-repeat center center;
 }
+.icon-user-shield{
+	background:url('icons/user_shield.png') no-repeat center center;
+}
+.icon-user{
+	background:url('icons/user.png') no-repeat center center;
+}
+.icon-users{
+	background:url('icons/users.png') no-repeat center center;
+}
+.icon-user-add{
+	background:url('icons/user_add.png') no-repeat center center;
+}
+.icon-user-del{
+	background:url('icons/user_del.png') no-repeat center center;
+}
+.icon-user-edit{
+	background:url('icons/user_edit.png') no-repeat center center;
+}
+.icon-wrench{
+	background:url('icons/wrench.png') no-repeat center center;
+}
+.icon-hummer{
+	background:url('icons/hummer.png') no-repeat center center;
+}
+.icon-lock{
+	background:url('icons/lock.png') no-repeat center center;
+}
+.icon-unlock{
+	background:url('icons/unlock.png') no-repeat center center;
+}
+.icon-key{
+	background:url('icons/key.png') no-repeat center center;
+}
 .icon-add{
 	background:url('icons/edit_add.png') no-repeat center center;
 }
@@ -61,4 +94,70 @@
 }
 .icon-mini-refresh{
 	background:url('icons/mini_refresh.png') no-repeat center center;
+}
+.icon-fastup{
+	background:url('icons/fastup.png') no-repeat center center;
+}
+.icon-fastdown{
+	background:url('icons/fastdown.png') no-repeat center center;
+}
+.icon-android{
+	background:url('icons/android.png') no-repeat center center;
+}
+.icon-login{
+	background:url('icons/login.png') no-repeat center center;
+}
+.icon-logout{
+	background:url('icons/logout.png') no-repeat center center;
+}
+.icon-action-undo{
+	background:url('icons/action_undo.png') no-repeat center center;
+}
+.icon-action-save{
+	background:url('icons/action_save.png') no-repeat center center;
+}
+.icon-action-plus{
+	background:url('icons/action_plus.png') no-repeat center center;
+}
+.icon-action-minus{
+	background:url('icons/action_minus.png') no-repeat center center;
+}
+.icon-action-search{
+	background:url('icons/action_search.png') no-repeat center center;
+}
+.icon-action-ok{
+	background:url('icons/action_ok.png') no-repeat center center;
+}
+.icon-action-cancel{
+	background:url('icons/action_cancel.png') no-repeat center center;
+}
+.icon-button-add{
+	background:url('icons/button_add.png') no-repeat center center;
+}
+.icon-button-remove{
+	background:url('icons/button_remove.png') no-repeat center center;
+}
+.icon-button-check{
+	background:url('icons/button_check.png') no-repeat center center;
+}
+.icon-doc-edit{
+	background:url('icons/doc_edit.png') no-repeat center center;
+}
+.icon-button-add-blue{
+	background:url('icons/button_add_blue.png') no-repeat center center;
+}
+.icon-button-remove-blue{
+	background:url('icons/button_remove_blue.png') no-repeat center center;
+}
+.icon-button-check-blue{
+	background:url('icons/button_check_blue.png') no-repeat center center;
+}
+.icon-button-cross{
+	background:url('icons/button_cross.png') no-repeat center center;
+}
+.icon-doc-edit-blue{
+	background:url('icons/doc_edit_blue.png') no-repeat center center;
+}
+.icon-button-search{
+	background:url('icons/button_search.png') no-repeat center center;
 }

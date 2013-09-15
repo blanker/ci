@@ -14,10 +14,10 @@
         </thead>
     </table>
     <div id="toolbarMenu">
-        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="append('#dgMenu', 'menu');">新增</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" onclick="removeit('#dgMenu', 'menu');">删除</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true" onclick="accept('#dgMenu','menu','<?=base_url();?>manager/system/commit_menu','id');">保存</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-undo',plain:true" onclick="reject('#dgMenu', 'menu');">撤销更改</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-action-plus',plain:true" onclick="append('#dgMenu', 'menu');">新增</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-action-minus',plain:true" onclick="removeit('#dgMenu', 'menu');">删除</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-action-save',plain:true" onclick="accept('#dgMenu','menu','<?=base_url();?>manager/system/commit_menu','id');">保存</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-action-undo',plain:true" onclick="reject('#dgMenu', 'menu');">撤销更改</a>
     </div>
 </div>
 

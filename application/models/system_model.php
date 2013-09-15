@@ -144,4 +144,61 @@ class System_model extends CI_Model{
         $sql .= ' where id = ' .$id;
         $this->db->query($sql);
     }
+    
+    function selectSomeSystemCode( $codeNames ){
+        $this->db->where_in('codeName', $codeNames);
+        // Produces: WHERE username IN ('Frank', 'Todd', 'James')
+        $this->db->select('codeName, codeValue, codeText');
+        $this->db->order_by('codeName, sortNum');
+        $q = $this->db->get(TABLE_SYSTEM_CODE);
+        $data = array();
+        if ( $q->num_rows() > 0 ) {
+            foreach ($q->result() as $row){
+                $data[$row->codeName][$row->codeValue] = $row->codeText;
+            }
+        }
+        return $data;
+    }
+    
+    function get_user_role($userId){
+        $this->db->select(TABLE_SYSTEM_USER_ROLE.'.id,'.TABLE_SYSTEM_USER_ROLE.'.userId,'.TABLE_SYSTEM_USER_ROLE.'.roleId,'.TABLE_SYSTEM_ROLE.'.roleName');
+        $this->db->from(TABLE_SYSTEM_USER_ROLE);
+        $this->db->join(TABLE_SYSTEM_ROLE, TABLE_SYSTEM_USER_ROLE.'.roleId = '.TABLE_SYSTEM_ROLE.'.id');
+        $this->db->where(TABLE_SYSTEM_USER_ROLE.'.userId',$userId);
+        $this->db->order_by(TABLE_SYSTEM_USER_ROLE.'.roleId');
+        $q = $this->db->get();
+        $data = array();
+        if ($q->num_rows()>0){
+            foreach($q->result() as $row){
+                $data[] = $row;
+            }
+        }
+        return $data;
+    }
+    function insertUserRoleRights($rows){
+        foreach($rows as $row) {
+            unset($row['roleName']);
+            $this->db->insert(TABLE_SYSTEM_USER_ROLE, $row);
+        }
+    }
+    
+    function recordTruckInfoHis($id, $modifyType, $uid){
+        $sql = 'insert into '.TABLE_TRUCK_INFO_HIS;
+        $sql .= '     ( `makeType`,`auditTime`, `auditUserId`, `auditUserName`, `bodyStruc`, `capacity`, `createUserName`, `driverName`, `driverSex`, `drivingLicense`, `freqLine`, `licenseType`, `locCity`, `locProvince`, `locRegion`, `mobileNo`, `plateNo`, `runningToken`, `truckBrand`, `truckLength`, `truckState`, `truckType`, `truckVolumn`,`modifyTime`,`truckInfoId`,`modifyType`,`createUserId` ) ';
+        $sql .= 'select `makeType`,`auditTime`, `auditUserId`, `auditUserName`, `bodyStruc`, `capacity`, `createUserName`, `driverName`, `driverSex`, `drivingLicense`, `freqLine`, `licenseType`, `locCity`, `locProvince`, `locRegion`, `mobileNo`, `plateNo`, `runningToken`, `truckBrand`, `truckLength`, `truckState`, `truckType`, `truckVolumn`,';
+        $sql .= 'current_timestamp, ' .$id. ', '.$modifyType.', '.$uid;
+        $sql .= '  from '.TABLE_TRUCK_INFO;
+        $sql .= ' where id = ' .$id;
+        $this->db->query($sql);
+    }
+
+    function recordFreightSourceHis($id, $modifyType, $uid){
+        $sql = 'insert into '.TABLE_FREIGHT_SOURCE_HIS;
+        $sql .= '     ( `attention`, `auditTime`, `auditUserId`, `auditUserName`, `createUserName`, `deliverTime`, `deliverUserId`, `destCity`, `destProvince`, `destRegion`, `freightName`, `freightState`, `freightType`, `freightVolumn`, `freightWeight`, `makeTime`, `originCity`, `originProvince`, `originRegion`, `packType`, `receiveTime`, `receiveUserId`, `makeType`, `modifyTime`, `freightSourceId`, `modifyType`,`createUserId` ) ';
+        $sql .= 'select `attention`, `auditTime`, `auditUserId`, `auditUserName`, `createUserName`, `deliverTime`, `deliverUserId`, `destCity`, `destProvince`, `destRegion`, `freightName`, `freightState`, `freightType`, `freightVolumn`, `freightWeight`, `makeTime`, `originCity`, `originProvince`, `originRegion`, `packType`, `receiveTime`, `receiveUserId`, `makeType`,';
+        $sql .= 'current_timestamp, id, '.$modifyType.', '.$uid;
+        $sql .= '  from '.TABLE_FREIGHT_SOURCE;
+        $sql .= ' where id = ' .$id;
+        $this->db->query($sql);
+    }
 }

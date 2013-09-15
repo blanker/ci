@@ -11,10 +11,10 @@
         </thead>
     </table>
     <div id="toolbarRole">
-        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="append('#dgRole', 'role');">新增</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" onclick="removeit('#dgRole', 'role');">删除</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true" onclick="accept('#dgRole','role','<?=base_url();?>manager/rights/commit_role','id');">保存</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-undo',plain:true" onclick="reject('#dgRole', 'role');">撤销更改</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-action-plus',plain:true" onclick="append('#dgRole', 'role');">新增</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-action-minus',plain:true" onclick="removeit('#dgRole', 'role');">删除</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-action-save',plain:true" onclick="accept('#dgRole','role','<?=base_url();?>manager/rights/commit_role','id');">保存</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-action-undo',plain:true" onclick="reject('#dgRole', 'role');">撤销更改</a>
     </div>
 </div>
 
@@ -54,10 +54,10 @@
         </thead>
     </table>
     <div id="toolbarRoleRights">
-        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="appendRoleRights('#dgRoleRights', 'roleRights');">新增</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" onclick="removeit('#dgRoleRights', 'roleRights');">删除</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true" onclick="accept('#dgRoleRights','roleRights','<?=base_url();?>manager/rights/commit_role_rights','id');">保存</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-undo',plain:true" onclick="reject('#dgRoleRights', 'roleRights');">撤销更改</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-action-plus',plain:true" onclick="appendRoleRights('#dgRoleRights', 'roleRights');">新增</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-action-minus',plain:true" onclick="removeit('#dgRoleRights', 'roleRights');">删除</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-action-save',plain:true" onclick="accept('#dgRoleRights','roleRights','<?=base_url();?>manager/rights/commit_role_rights','id');">保存</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-action-undo',plain:true" onclick="reject('#dgRoleRights', 'roleRights');">撤销更改</a>
     </div>
 </div>
 
@@ -68,8 +68,8 @@
     </form>
 </div>
 <div id="dlgRoleRights-buttons">
-    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="chooseNewMenu($('#fmRoleMenus').serializeArray());$('#dlgRoleRights').dialog('close');">确定</a>
-    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlgRoleRights').dialog('close');">取消</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-action-ok" onclick="chooseNewMenu($('#fmRoleMenus').serializeArray());$('#dlgRoleRights').dialog('close');">确定</a>
+    <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-action-cancel" onclick="javascript:$('#dlgRoleRights').dialog('close');">取消</a>
 </div>
 
 <script type="text/javascript">
@@ -148,6 +148,7 @@
     
     // 新增菜单权限
     function appendRoleRights( datagridId ,indexKey ){
+        if (editIndex['role'] === undefined) return; 
         if (endEditing( datagridId, indexKey )){ // 首先还是要判断是否能结束当前编辑行
             var newMenusObj = jQuery.extend(true, {}, allMenuNames);
             $.each($(datagridId).datagrid('getRows'), function(idx, row){

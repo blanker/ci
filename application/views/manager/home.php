@@ -23,10 +23,12 @@
         text-decoration:none;
     }
     * { font-size: 14px; }
+    th { text-align: center; }
 </style>
 <?php echo $this->load->view("includes/jquery");?>
 <?php echo $this->load->view("includes/jeasyui");?>
 <script type="text/javascript" src="<?=base_url();?>html/js/manager/home.js"></script>
+<script type="text/javascript" src="<?=base_url();?>html/js/manager/RegionData.js" charset='gbk'></script>
 </head>
 <body class="easyui-layout">
     <div data-options="region:'north'" style="height:60px"></div>

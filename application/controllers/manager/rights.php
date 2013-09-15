@@ -183,7 +183,11 @@ class Rights extends CI_Controller{
         $this->load->view("rights/system_role", $data);
     }
     function system_user(){
-        $this->load->view("rights/system_user");
+        $this->load->model('system_model');
+        $codeNames = array('makeType','custType');
+        $codes = $this->system_model->selectSomeSystemCode($codeNames);
+        $data['codes'] = json_encode($codes, JSON_FORCE_OBJECT);
+        $this->load->view("rights/system_user", $data);
     }
     function get_menu_rights_list(){
         $this->load->model('system_model');
@@ -283,5 +287,37 @@ class Rights extends CI_Controller{
             ->set_output( json_encode( $result));
     }
     
-    
+    function test_code(){
+        $this->load->model('system_model');
+        $codeNames = array('makeType','custType');
+        $data = $this->system_model->selectSomeSystemCode($codeNames);
+        print_r($data);
+        echo "<br>".json_encode($data, JSON_FORCE_OBJECT);
+    }
+    function get_user_role(){
+        $userId = isset($_POST['userId']) ? intval($_POST['userId']) : 0;
+        $this->load->model('system_model');
+        $list = $this->system_model->get_user_role($userId);
+        $result['rows'] = $list ;
+        $this->output
+            ->set_content_type("application/json")
+            ->set_output( json_encode( $result));
+    }
+    function commit_user_role_rights(){
+        $inserted = isset($_POST['inserted']) ? json_decode( $_POST['inserted'], true ) : false;
+        $deleted = isset($_POST['deleted']) ? json_decode( $_POST['deleted'], true ) : false;
+        if ( $inserted ) {
+            $this->load->model('system_model');
+            $this->system_model->insertUserRoleRights($inserted);
+        }
+        if ( $deleted ) {
+            $this->load->model('common_model');
+            $this->common_model->deleteItems(TABLE_SYSTEM_USER_ROLE, $deleted, 'id');
+        }
+        
+        $result['status'] = 'OK';
+        $this->output
+            ->set_content_type("application/json")
+            ->set_output( json_encode( $result));
+    }
 }

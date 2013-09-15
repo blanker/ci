@@ -33,9 +33,9 @@
     </table>
     <div id="toolbarMenuRights">
         <div style="border:1px solid #ddd; padding:5px;">
-            <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" onclick="removeit('#dgMenuRights','menurights');">删除</a>
-            <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true" onclick="accept('#dgMenuRights','menurights','<?=base_url("manager/rights/commit_menu_rights");?>','id');">保存</a>
-            <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-undo',plain:true" onclick="reject('#dgMenuRights','menurights');">撤销更改</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-action-minus',plain:true" onclick="removeit('#dgMenuRights','menurights');">删除</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-action-save',plain:true" onclick="accept('#dgMenuRights','menurights','<?=base_url("manager/rights/commit_menu_rights");?>','id');">保存</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-action-undo',plain:true" onclick="reject('#dgMenuRights','menurights');">撤销更改</a>
         </div>
     </div>
 </div>
